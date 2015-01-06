@@ -1,0 +1,3 @@
+include linotpdselfservice/config/deployment.ini_tmpl
+recursive-include linotpdselfservice/public *
+recursive-include linotpdselfservice/templates *

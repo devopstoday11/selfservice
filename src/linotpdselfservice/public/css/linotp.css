@@ -1,0 +1,122 @@
+/*
+ * Common styles used by all parts of LinOTP
+ */
+
+#do_waiting {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    width: 320px;
+    height: 30px;
+    padding: 40px;
+    margin-top: -55px;
+    margin-left: -200px;
+    background-color: #EEE;
+    border: 1px solid #666;
+    z-index: 1000;
+    box-shadow:0 0 20px 5px #000;
+}
+
+#do_waiting span {
+    margin-left: 5px;
+}
+
+#load_tokenfile_form_dat input {
+    margin:10px;
+}
+
+.contact_info {
+    text-align: center;
+}
+
+.subscription_detail {
+    font-size: 80%;
+}
+
+.disabled {
+    opacity:.2;
+}
+.indent {
+  padding-left: 1em;
+  text-align: left;
+  font-weight: normal;
+  font-size: 90%;
+}
+
+.enrollment_annotation {
+  font-size: 100%;
+}
+
+.enrollment_value {
+  font-size: 50%;
+}
+
+.sel_box {
+    margin-bottom: 20px;
+}
+
+
+.sel_user_box {
+    height: 1.2em;
+    font-size: 80%;
+    padding-bottom: 5px;
+}
+
+.sel_tok_box {
+    height: 5em;
+    overflow: auto;
+    font-size: 80%;
+}
+
+.annotation {
+    font-style: italic;
+    font-size: 90%;
+}
+
+.hint {
+    font-size: 70%;
+    opacity: 0.8;
+}
+
+.legend {
+    font-size: 90%;
+    opacity: 0.8;
+}
+
+.resolver_dialog_label {
+    font-style: italic;
+    font-size: 85%;
+    opacity:.5;
+}
+tr.space > th
+{
+  padding-top: 0.7em;
+  text-align: left;
+  font-weight: normal;
+}
+#googletokenform li
+{
+  padding-bottom: 0.7em;
+}
+td.description
+{
+  padding-left: 1em;
+  text-align: left;
+  font-weight: normal;
+  font-size: 90%;
+}
+
+td.description_w_space
+{
+  padding-top: 0.7em;
+}
+
+
+h2 {
+    color: #fe8625;
+}
+
+h3 {
+    color: #fe8625;
+}

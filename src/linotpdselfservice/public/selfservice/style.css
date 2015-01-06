@@ -1,0 +1,217 @@
+/*!
+ *   LinOTP - the open source solution for two factor authentication
+ *   Copyright (C) 2010 - 2015 LSE Leading Security Experts GmbH
+ *
+ *   This file is part of LinOTP server.
+ *
+ *   This program is free software: you can redistribute it and/or
+ *   modify it under the terms of the GNU Affero General Public
+ *   License, version 3, as published by the Free Software Foundation.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Affero General Public License for more details.
+ *
+ *   You should have received a copy of the
+ *              GNU Affero General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ *    E-mail: linotp@lsexperts.de
+ *    Contact: www.linotp.org
+ *    Support: www.lsexperts.de
+ *
+ */
+/*** STYLES ***/
+a.activeToken {
+	color: black;
+	background-color:white;
+}
+a.disabledToken {
+	color: black;
+	text-decoration:line-through;
+}
+
+h1 {
+	color: #fe8625;
+}
+
+body {
+    font-family: helvetica, impact, sans-serif;
+}
+
+#wrap {
+    width:97%;
+    margin:0 auto;
+}
+
+
+#main {
+    float:right;
+    width:68%;
+    background: #080808;
+    padding: 3px;
+}
+
+#sidebar {
+    float:left;
+    width:30%;
+    display: block;
+    min-height: 33em;
+    background:#eeeeee;
+    border-right: 1px solid #fe8625;
+    margin: 2px;
+    padding: 3px;
+}
+
+#imprint {
+	 /*position: absolute;
+	 bottom:  0;
+	 */
+}
+
+
+#header {
+    background: none repeat scroll 0 0 #EEEEEE;
+    font-size:medium;
+    margin-bottom: 0px;
+    padding: 0.3em;
+    padding-left: 1em;
+    height: 50px;
+    border-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #AAAAAA;
+}
+
+#logo{
+    background-image:  url(/images/linotp_logo_103x35.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    display: block;
+    height: 50px;
+    width: 110px;
+}
+
+.header {
+    width : 100%;
+}
+
+.float_left {
+    float:left;
+}
+
+.float_right{
+    float:right;
+    text-align:right;
+}
+
+.portalname{
+    color: #fe8625;
+    font-size:200%;
+    /*	text-shadow:black 3px 2px 4px; */
+}
+
+
+#menu {
+    width:100%;
+}
+#nav {
+    background:#dddddd;
+    //float:left;
+ }
+
+#logout {
+    float:right;
+}
+.logout {
+    float:right;
+    text-align: right;
+    font-size: 0.7em;
+    margin-top: -0.5em;
+    padding-right: 2px;
+}
+
+
+ #main {
+ background:#fefefe;
+ }
+
+
+#footer {
+    background: none repeat scroll 0 0 #080808;
+    border-radius: 4px;
+    clear: both;
+    color: white;
+    margin-top: 2px;
+    padding: 2px;
+}
+
+ #nav ul {
+   margin:0;
+   padding:0;
+   list-style:none;
+ }
+ #nav li {
+   display:inline;
+   margin:0;
+   padding:0;
+ }
+
+ #nav ul li a,
+ #nav ul li a:visited {
+    color:#333;padding:0 10px;
+    height:30px;
+    border-right:1px solid #ffffff;
+    line-height:30px;
+    background:#fe8625;
+    text-decoration: none;
+    }
+
+ #nav ul li a:hover {
+ 	color:#ffffff;
+ 	text-decoration:none;
+ 	border-bottom:3px solid #111111;
+ 	margin: -3px 0 0 0;
+	text-shadow:black 2px 1px 2px;
+ }
+
+table.getotp {
+	color: #121212;
+	border:0px;
+	margin: 1px 1px 5px 0;
+    width: 100%;
+    text-align: center;
+}
+tr.even {
+    background-color: #fff0e6;
+}
+td.getotp {
+	color: #121212;
+	border:0px solid #AAAAAA;
+	margin: 1px 1px 5px 0
+}
+
+td.value  {
+	color: red;
+	padding: 0 10px;
+}
+
+td.key  {
+	color: green;
+	padding: 0 10px;
+}
+
+label.error {
+	color: red;
+}
+
+.javascript_error {
+	display:block;
+	z-index:2000;
+	background-color: #EB6D5A;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	margin: 5px 0;
+}
