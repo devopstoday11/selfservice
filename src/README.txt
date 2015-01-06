@@ -4,9 +4,9 @@ you would include information such as the information below:
 Installation and Setup
 ======================
 
-Install ``linotpd-selfservice`` using easy_install::
+Install ``LinOTPSelfservice`` using easy_install::
 
-    easy_install linotpd-selfservice
+    easy_install linotp-selfservice
 
 Make a config file as follows::
 

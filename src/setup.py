@@ -6,7 +6,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(
-    name='linotpd-selfservice',
+    name='linotpselfservice',
     version='0.1',
     description='',
     author='',
@@ -19,8 +19,8 @@ setup(
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
     test_suite='nose.collector',
-    package_data={'linotpdselfservice': ['i18n/*/LC_MESSAGES/*.mo']},
-    message_extractors={'linotpdselfservice': [
+    package_data={'selfservice': ['i18n/*/LC_MESSAGES/*.mo']},
+    message_extractors={'selfservice': [
             ('**.py', 'python', None),
             ('templates/**.mako', 'mako', {'input_encoding': 'utf-8'}),
             ('public/js/tools.js', 'javascript', {'input_encoding': 'utf-8'}),
@@ -31,7 +31,7 @@ setup(
     paster_plugins=['PasteScript', 'Pylons'],
     entry_points="""
     [paste.app_factory]
-    main = linotpdselfservice.config.middleware:make_app
+    main = selfservice.config.middleware:make_app
 
     [paste.app_install]
     main = pylons.util:PylonsInstaller
