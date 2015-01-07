@@ -45,10 +45,10 @@ install:
 
 clean:
 	python setup.py clean
-	rm -rf build/ MANIFEST dist/
-	find . -name '*.pyc' -delete
-	rm -f ./*.build
-	rm -f ./*.upload
-	rm -f ./*.tar.gz
-	rm -f $(I18N_JSON_FILES)
 	rm -rf ../build/
+	rm -rf dist/
+	find . -name '*.pyc' -delete
+	rm -f $(I18N_JSON_FILES)
+	rm -rf LinOTPSelfservice.egg-info/
+	rm -f selfservice/i18n/de/LC_MESSAGES/selfservice.mo
+	rm -f selfservice/i18n/selfservice.pot
