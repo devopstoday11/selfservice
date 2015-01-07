@@ -5,9 +5,11 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
+from selfservice import __version__
+
 setup(
     name='LinOTPSelfservice',
-    version='0.1',
+    version=__version__,
     description='',
     author='',
     author_email='',
