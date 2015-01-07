@@ -1,10 +1,4 @@
-ECHO    = echo
-PYTHON=`which python`
 DESTDIR=/
-BUILDIR=$(CURDIR)/debian/linotp-selfservice
-VERSION = 2.7.2.dev0
-PROJECT=LinOTPSelfservice
-COPYSTUFF = tools setup.* selfservice config debian Makefile DESCRIPTION MANIFEST.in README.txt
 
 I18N_LANGUAGES = de
 I18N_SRC := $(CURDIR)/selfservice/i18n
@@ -14,15 +8,10 @@ I18N_JSON_FILES := $(foreach lang,$(I18N_LANGUAGES),$(I18N_JSON_DEST)/$(lang).js
 
 
 all:
-	@echo "make source - Create source package"
 	@echo "make create - Create the source packages"
 	@echo "make install - Install on local system"
-	@echo "make buildrpm - Generate a rpm package"
-	@echo "make builddeb - Generate a deb package"
 	@echo "make clean - Get rid of scratch and byte files"
 	@echo "make translate"
-	@echo "make ppa-dev - Publish in ppa repository selfservice-dev"
-
 
 extract:
 	python setup.py extract_messages
@@ -45,31 +34,21 @@ translate: extract
 buildtranslation: extract
 	make compile_catalog
 
-source:
-	make buildtranslation
-	$(PYTHON) setup.py sdist $(COMPILE)
-
 create:
 	mkdir -p ../build
 	make buildtranslation
-	make source
+	python setup.py sdist
 	cp dist/*.tar* ../build/
 
 install:
-	$(PYTHON) setup.py install --root $(DESTDIR) $(COMPILE)
-
+	python setup.py install --root $(DESTDIR)
 
 clean:
-	$(PYTHON) setup.py clean
+	python setup.py clean
 	rm -rf build/ MANIFEST dist/
 	find . -name '*.pyc' -delete
-	#rm -r dist/
 	rm -f ./*.build
 	rm -f ./*.upload
 	rm -f ./*.tar.gz
 	rm -f $(I18N_JSON_FILES)
-	fakeroot $(MAKE) -f $(CURDIR)/debian/rules clean
 	rm -rf ../build/
-
-
-
