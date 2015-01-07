@@ -6,7 +6,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 setup(
-    name='linotpselfservice',
+    name='LinOTPSelfservice',
     version='0.1',
     description='',
     author='',
