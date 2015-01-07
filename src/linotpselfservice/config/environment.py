@@ -5,9 +5,9 @@ from mako.lookup import TemplateLookup
 from pylons.configuration import PylonsConfig
 from pylons.error import handle_mako_error
 
-import linotpdselfservice.lib.app_globals as app_globals
-import linotpdselfservice.lib.helpers
-from linotpdselfservice.config.routing import make_map
+import linotpselfservice.lib.app_globals as app_globals
+import linotpselfservice.lib.helpers
+from linotpselfservice.config.routing import make_map
 
 app_config = None
 
@@ -25,11 +25,11 @@ def load_environment(global_conf, app_conf):
                  templates=[os.path.join(root, 'templates')])
 
     # Initialize config with the basic options
-    config.init_app(global_conf, app_conf, package='linotpdselfservice', paths=paths)
-    config['linotpdselfservice'] = app_conf
+    config.init_app(global_conf, app_conf, package='linotpselfservice', paths=paths)
+    config['linotpselfservice'] = app_conf
     config['routes.map'] = make_map(config, global_conf, app_conf)
     config['pylons.app_globals'] = app_globals.Globals(config)
-    config['pylons.h'] = linotpdselfservice.lib.helpers
+    config['pylons.h'] = linotpselfservice.lib.helpers
     
     # Setup cache object as early as possible
     import pylons

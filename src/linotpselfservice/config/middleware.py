@@ -8,7 +8,7 @@ from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
 from routes.middleware import RoutesMiddleware
 
-from linotpdselfservice.config.environment import load_environment
+from linotpselfservice.config.environment import load_environment
 
 repoze_load = False
 try:

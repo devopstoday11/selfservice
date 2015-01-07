@@ -8,9 +8,9 @@ from pylons import request, response, config, tmpl_context as c
 from pylons.controllers.util import abort
 from pylons.templating import render_mako as render
 
-from linotpdselfservice.lib.util import (check_selfservice_session,
+from linotpselfservice.lib.util import (check_selfservice_session,
                                          isSelfTest)
-from linotpdselfservice.lib.base import BaseController
+from linotpselfservice.lib.base import BaseController
 
 from pylons.i18n.translation import _
 
@@ -63,8 +63,12 @@ class SelfserviceController(BaseController):
         else:
             self.userid = identity['repoze.who.userid']
             self.auth_cookie = None
+        try:
+            self.context = self.get_context({"user" :self.userid})
+        except Exception as exx:
+            log.error("linotp context lookup failed %r" % exx)
+            abort(401, _("You are not authenticated"))
 
-        self.context = self.get_context({"user" :self.userid})
         copy_context_(self.context)
 
         # we need not to check the session here as here only the

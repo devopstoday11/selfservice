@@ -36,7 +36,7 @@ from pylons.controllers.util import abort, redirect
 from pylons.templating import render_mako as render
 from pylons.i18n.translation import get_lang
 
-from linotpdselfservice.lib.base import BaseController
+from linotpselfservice.lib.base import BaseController
 from linotp.lib.reply import sendError
 
 import json

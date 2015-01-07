@@ -7,7 +7,7 @@ from pylons.controllers import WSGIController
 from pylons.i18n.translation import set_lang
 from pylons.i18n import LanguageError
 
-from linotpdselfservice.config.environment import app_config
+from linotpselfservice.config.environment import app_config
 from pylons import request, response, tmpl_context as c
 
 from urlparse import urlparse

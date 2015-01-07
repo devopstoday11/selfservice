@@ -20,7 +20,7 @@ full_stack = true
 static_files = true
 
 cache_dir = %(here)s/data
-beaker.session.key = linotpdselfservice
+beaker.session.key = linotpselfservice
 beaker.session.secret = ${app_instance_secret}
 app_instance_uuid = ${app_instance_uuid}
 

@@ -13,8 +13,8 @@ from pylons import request, response, config, tmpl_context as c
 from pylons.controllers.util import abort
 from pylons.templating import render_mako as render
 
-from linotpdselfservice.lib.util import check_selfservice_session
-from linotpdselfservice.lib.base import BaseController
+from linotpselfservice.lib.util import check_selfservice_session
+from linotpselfservice.lib.base import BaseController
 from linotp.lib.reply import sendError
 
 from pylons.i18n.translation import _
