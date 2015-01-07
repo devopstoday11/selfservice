@@ -22,3 +22,6 @@ src/selfservice/i18n/de/LC_MESSAGES/selfservice.mo
 src/selfservice/i18n/selfservice.pot
 src/selfservice/public/i18n/
 
+src/Paste-*-py*.egg/
+src/PasteDeploy-*-py*.egg/
+src/PasteScript-*-py*.egg/
