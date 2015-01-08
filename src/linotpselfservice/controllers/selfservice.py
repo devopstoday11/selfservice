@@ -87,16 +87,15 @@ class SelfserviceController(BaseController):
     def load_form(self):
         '''
         retrieve the form data eg. for token enrollment
+
+        the load_form rendering context is rebuild on the LinOTP server side
+        from the provided user context
         '''
         params = {}
         reply = {}
         try:
             params.update(request.params)
             params['user'] = self.userid
-
-            # fill in the context as parameter
-            context = json.dumps(self.context)
-            params['context'] = context
 
             reply = self.call_linotp('/userservice/load_form',
                                      params=params, return_json=False)
