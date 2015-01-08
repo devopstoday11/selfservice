@@ -18,9 +18,9 @@ PKG-INFO
 
 # Build artifacts
 
-src/selfservice/i18n/de/LC_MESSAGES/selfservice.mo
-src/selfservice/i18n/selfservice.pot
-src/selfservice/public/i18n/
+src/linotpselfservice/i18n/de/LC_MESSAGES/linotpselfservice.mo
+src/linotpselfservice/i18n/linotpselfservice.pot
+src/linotpselfservice/public/i18n/
 
 src/Paste-*-py*.egg/
 src/PasteDeploy-*-py*.egg/
