@@ -26,6 +26,120 @@ msgstr "LinOTP Selfservice"
 msgid "No valid session"
 msgstr "Keine gültige Session"
 
+msgid "there is no linotp_selfservice cookie"
+msgstr "das linotp_selfservice Cookie fehlt"
+
+msgid "Your session has expired!"
+msgstr "Ihre Sitzung ist abgelaufen!"
+
+msgid "Error "
+msgstr "Fehler "
+
+msgid "You need to select a Token and enter two OTP values."
+msgstr "Sie m?ssen ein Token ausw?hlen und zwei OTP Werte eingeben."
+
+msgid "Token resynced successfully"
+msgstr "Die Synchronisation des Tokens war erfolgreich"
+
+msgid "Failed to resync Token"
+msgstr "Fehler bei der Synchronisation des Token"
+
+msgid "Error resyncing Token: "
+msgstr "Fehler beim Synchronisieren des Tokens: "
+
+msgid "You need to enter a serial number"
+msgstr "Sie müssen eine Seriennummer eingeben"
+
+msgid ""
+"You are going to assign a new token to you. Is this the correct serial: "
+msgstr ""
+"Sie wollen sich einen neuen Token zuweisen. Ist dies die richtige "
+"Seriennummer:"
+
+msgid "Token assigned successfully"
+msgstr "Token erfolgreich zugewiesen"
+
+msgid "Error assigning Token: "
+msgstr "Fehler beim Zuweisen des Tokens: "
+
+msgid "You need to enter an OTP value"
+msgstr "Sie müssen einen OTP Wert eingeben"
+
+msgid "No Token with this OTP value found!"
+msgstr "Keinen Token gefunden, für den der OTP Wert passt!"
+
+msgid "Error getting serial: "
+msgstr "Fehler beim Bestimmen der Seriennummer: "
+
+msgid "Error calling token:"
+msgstr "Fehler beim Bearbeiten des Tokens: "
+
+msgid "Form data not valid."
+msgstr "Formular Daten sind ungültig."
+
+msgid "Token enrollment result"
+msgstr "Ergebnis des Token Ausrollens"
+
+msgid "Token enrolled successfully "
+msgstr "Token erfolgreich ausgerollt "
+
+msgid "Failed to enroll token: "
+msgstr "Fehler beim Ausrollen des Token: "
+
+msgid "Failcounter resetted successfully"
+msgstr "Fehlerzähler erfolgreich zurück gesetzt"
+
+msgid "Failed to reset failcounter!\n"
+msgstr "Fehler beim Zurücksetzen des Fehlerzählers!\n"
+
+msgid "Token disabled successfully"
+msgstr "Token erfolgreich deaktiviert"
+
+msgid "Error disabling Token!\n"
+msgstr "Fehler beim Deaktivieren des Tokens!\n"
+
+msgid "Token enabled successfully"
+msgstr "Tokem erfolgreich aktiviert"
+
+msgid "Error enabling Token!\n"
+msgstr "Fehler beim Aktivieren des Tokens!\n"
+
+msgid "OTP values for token "
+msgstr "OTP Werte für den Token "
+
+msgid "Time"
+msgstr "Zeit"
+
+msgid "Counter"
+msgstr "Zähler"
+
+msgid "Otp Value"
+msgstr "OTP Werte"
+
+msgid "Error getting otp values"
+msgstr "Fehler beim Holen der OTP Werte"
+
+msgid "Token unassigned successfully"
+msgstr "Token Zuweisung erfolgreich aufgehoben"
+
+msgid "Error unassigning Token!\n"
+msgstr "Fehler beim Aufheben der Token Zuweisung!\n"
+
+msgid "Token deleted successfully"
+msgstr "Token erfolgreich gelöscht"
+
+msgid "Failed to delete token!\n"
+msgstr "Fehler beim Löschen des Tokens!\n"
+
+msgid "Failed to enroll token!\n"
+msgstr "Fehler beim Ausrollen des Tokens!\n"
+
+msgid "Failed to activate token! \n"
+msgstr "Fehler beim Aktivieren des Tokens! \n"
+
+msgid "Error loading history:\n"
+msgstr "Fehler beim Laden der Historie:\n"
+
 msgid "Activate your OCRA Token"
 msgstr "OCRA Token aktivieren"
 
@@ -371,117 +485,3 @@ msgid "Or you can scan the QR code below your iPhone to import the secret."
 msgstr ""
 "Alternativ können Sie den QR Code mit ihrem iPhone einscannen um das "
 "Geheimnis zu übertragen"
-
-#~ msgid "there is no linotp_selfservice cookie"
-#~ msgstr "das linotp_selfservice Cookie fehlt"
-
-#~ msgid "Your session has expired!"
-#~ msgstr "Ihre Sitzung ist abgelaufen!"
-
-#~ msgid "Error "
-#~ msgstr "Fehler "
-
-#~ msgid "You need to select a Token and enter two OTP values."
-#~ msgstr "Sie m?ssen ein Token ausw?hlen und zwei OTP Werte eingeben."
-
-#~ msgid "Token resynced successfully"
-#~ msgstr "Die Synchronisation des Tokens war erfolgreich"
-
-#~ msgid "Failed to resync Token"
-#~ msgstr "Fehler bei der Synchronisation des Token"
-
-#~ msgid "Error resyncing Token: "
-#~ msgstr "Fehler beim Synchronisieren des Tokens: "
-
-#~ msgid "You need to enter a serial number"
-#~ msgstr "Sie müssen eine Seriennummer eingeben"
-
-#~ msgid ""
-#~ "You are going to assign a new token to you. Is this the correct serial: "
-#~ msgstr ""
-#~ "Sie wollen sich einen neuen Token zuweisen. Ist dies die richtige "
-#~ "Seriennummer:"
-
-#~ msgid "Token assigned successfully"
-#~ msgstr "Token erfolgreich zugewiesen"
-
-#~ msgid "Error assigning Token: "
-#~ msgstr "Fehler beim Zuweisen des Tokens: "
-
-#~ msgid "You need to enter an OTP value"
-#~ msgstr "Sie müssen einen OTP Wert eingeben"
-
-#~ msgid "No Token with this OTP value found!"
-#~ msgstr "Keinen Token gefunden, für den der OTP Wert passt!"
-
-#~ msgid "Error getting serial: "
-#~ msgstr "Fehler beim Bestimmen der Seriennummer: "
-
-#~ msgid "Error calling token:"
-#~ msgstr "Fehler beim Bearbeiten des Tokens: "
-
-#~ msgid "Form data not valid."
-#~ msgstr "Formular Daten sind ungültig."
-
-#~ msgid "Token enrollment result"
-#~ msgstr "Ergebnis des Token Ausrollens"
-
-#~ msgid "Token enrolled successfully "
-#~ msgstr "Token erfolgreich ausgerollt "
-
-#~ msgid "Failed to enroll token: "
-#~ msgstr "Fehler beim Ausrollen des Token: "
-
-#~ msgid "Failcounter resetted successfully"
-#~ msgstr "Fehlerzähler erfolgreich zurück gesetzt"
-
-#~ msgid "Failed to reset failcounter!\n"
-#~ msgstr "Fehler beim Zurücksetzen des Fehlerzählers!\n"
-
-#~ msgid "Token disabled successfully"
-#~ msgstr "Token erfolgreich deaktiviert"
-
-#~ msgid "Error disabling Token!\n"
-#~ msgstr "Fehler beim Deaktivieren des Tokens!\n"
-
-#~ msgid "Token enabled successfully"
-#~ msgstr "Tokem erfolgreich aktiviert"
-
-#~ msgid "Error enabling Token!\n"
-#~ msgstr "Fehler beim Aktivieren des Tokens!\n"
-
-#~ msgid "OTP values for token "
-#~ msgstr "OTP Werte für den Token "
-
-#~ msgid "Time"
-#~ msgstr "Zeit"
-
-#~ msgid "Counter"
-#~ msgstr "Zähler"
-
-#~ msgid "Otp Value"
-#~ msgstr "OTP Werte"
-
-#~ msgid "Error getting otp values"
-#~ msgstr "Fehler beim Holen der OTP Werte"
-
-#~ msgid "Token unassigned successfully"
-#~ msgstr "Token Zuweisung erfolgreich aufgehoben"
-
-#~ msgid "Error unassigning Token!\n"
-#~ msgstr "Fehler beim Aufheben der Token Zuweisung!\n"
-
-#~ msgid "Token deleted successfully"
-#~ msgstr "Token erfolgreich gelöscht"
-
-#~ msgid "Failed to delete token!\n"
-#~ msgstr "Fehler beim Löschen des Tokens!\n"
-
-#~ msgid "Failed to enroll token!\n"
-#~ msgstr "Fehler beim Ausrollen des Tokens!\n"
-
-#~ msgid "Failed to activate token! \n"
-#~ msgstr "Fehler beim Aktivieren des Tokens! \n"
-
-#~ msgid "Error loading history:\n"
-#~ msgstr "Fehler beim Laden der Historie:\n"

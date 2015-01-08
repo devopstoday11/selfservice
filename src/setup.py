@@ -26,7 +26,7 @@ setup(
             ('**.py', 'python', None),
             ('templates/**.mako', 'mako', {'input_encoding': 'utf-8'}),
             ('public/js/tools.js', 'javascript', {'input_encoding': 'utf-8'}),
-            ('public/js/linotpselfservice.js', 'javascript', {'input_encoding': 'utf-8'}),
+            ('public/js/selfservice.js', 'javascript', {'input_encoding': 'utf-8'}),
             ('public/js/linotp_utils.js', 'javascript', {'input_encoding': 'utf-8'}),
             ('public/**', 'ignore', None)]},
     zip_safe=False,
