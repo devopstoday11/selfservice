@@ -70,7 +70,7 @@ class AccountController(BaseController):
         try:
 
             self.context = self.get_preauth_context()
-            c.secure_auth = self.context.get('secure_auth', False)
+            c.otpLogin = self.context.get('otpLogin', False)
             c.version = self.context['version']
             c.licenseinfo = self.context['licenseinfo']
             c.browser_language = self.browser_language

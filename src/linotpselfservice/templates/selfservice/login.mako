@@ -113,7 +113,7 @@ ${_("If you lost a token, you may also disable this token.")}
         <td><input autocomplete="off" type="password" id="password" 
                     name="password" value ="" /></td></tr>
 
-     %if c.secure_auth == True:
+     %if c.otpLogin == True:
         <tr><td><label for='otp'>${_("OTP")}:</label></td>
         <td><input autocomplete="off" type="password" id="otp" 
                     name="otp" value ="" /></td></tr>
