@@ -3,12 +3,14 @@
 Provides the BaseController class for subclassing.
 """
 
+from pylons import request, response, tmpl_context as c
+
 from pylons.controllers import WSGIController
 from pylons.i18n.translation import set_lang
 from pylons.i18n import LanguageError
 
 from linotpselfservice.config.environment import app_config
-from pylons import request, response, tmpl_context as c
+from linotpselfservice.lib.util import get_version
 
 from urlparse import urlparse
 import json
@@ -212,7 +214,23 @@ class BaseController(WSGIController):
 
         return
 
-    def sendError(self, response, errDesc, errId=311):
+    def sendError(self, response, exception, errId=311, context=None):
+        """
+        return an error response to the client
+        """
+        version = get_version()
+        id = '1.0'
+
+        ## handle the different types of exception:
+        ## Exception, LinOtpError, str/unicode
+        if (hasattr(exception, '__class__') == True
+            and isinstance(exception, Exception)):
+                errDesc = unicode(exception)
+        elif type(exception) in [str, unicode]:
+            errDesc = unicode(exception)
+        else:
+            errDesc = u"%r" % exception
+
         response.content_type = 'application/json'
         res = { "jsonrpc": "2.0",
                 "result" :
@@ -222,9 +240,15 @@ class BaseController(WSGIController):
                             "message" :   errDesc,
                             },
                     },
-                 "version": get_version(),
+                 "version": version,
                  "id": id
             }
 
         ret = json.dumps(res, indent=3)
+
+        if context in ['before', 'after']:
+            response._exception = exception
+            response.body = ret
+            ret = response
+
         return res

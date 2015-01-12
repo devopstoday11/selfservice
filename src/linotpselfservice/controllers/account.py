@@ -37,7 +37,6 @@ from pylons.templating import render_mako as render
 from pylons.i18n.translation import get_lang
 
 from linotpselfservice.lib.base import BaseController
-from linotp.lib.reply import sendError
 
 import json
 import httplib
@@ -70,6 +69,9 @@ class AccountController(BaseController):
         try:
 
             self.context = self.get_preauth_context()
+            if not self.context:
+                raise Exception("Faild to setup context - check your LinOTP connection!")
+
             c.otpLogin = self.context.get('otpLogin', False)
             c.version = self.context['version']
             c.licenseinfo = self.context['licenseinfo']

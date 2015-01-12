@@ -8,8 +8,7 @@ from pylons import request, response, config, tmpl_context as c
 from pylons.controllers.util import abort
 from pylons.templating import render_mako as render
 
-from linotpselfservice.lib.util import (check_selfservice_session,
-                                         isSelfTest)
+from linotpselfservice.lib.util import check_selfservice_session
 from linotpselfservice.lib.base import BaseController
 
 from pylons.i18n.translation import _

@@ -1,4 +1,6 @@
 
+from linotpselfservice import __version__ as version
+
 import logging
 log = logging.getLogger(__name__)
 
@@ -24,5 +26,15 @@ def check_selfservice_session(request):
 
     return res
 
-def isSelfTest():
-    return True
+def get_version_number():
+    '''
+    returns the linotp version
+    '''
+    return version
+
+def get_version():
+    '''
+    This returns the version, that is displayed in the WebUI and self service portal.
+    '''
+    version = get_version_number()
+    return "LinOTP SelfService %s" % version
