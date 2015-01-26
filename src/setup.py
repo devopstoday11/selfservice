@@ -21,7 +21,6 @@ setup(
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
     test_suite='nose.collector',
-    package_data={'linotpselfservice': ['i18n/*/LC_MESSAGES/*.mo']},
     message_extractors={'linotpselfservice': [
             ('**.py', 'python', None),
             ('templates/**.mako', 'mako', {'input_encoding': 'utf-8'}),

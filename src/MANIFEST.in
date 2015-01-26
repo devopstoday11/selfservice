@@ -1,3 +1,4 @@
 include linotpselfservice/config/deployment.ini_tmpl
 recursive-include linotpselfservice/public *
 recursive-include linotpselfservice/templates *
+recursive-include linotpselfservice/i18n *
