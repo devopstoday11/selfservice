@@ -18,7 +18,7 @@ PKG-INFO
 
 # Build artifacts
 
-src/linotpselfservice/i18n/de/LC_MESSAGES/linotpselfservice.mo
+src/linotpselfservice/i18n/*/LC_MESSAGES/linotpselfservice.mo
 src/linotpselfservice/i18n/linotpselfservice.pot
 src/linotpselfservice/public/i18n/
 
