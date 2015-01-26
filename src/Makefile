@@ -15,7 +15,20 @@ all:
 
 extract:
 	python setup.py extract_messages
-	msgmerge -U linotpselfservice/i18n/de/LC_MESSAGES/linotpselfservice.po linotpselfservice/i18n/linotpselfservice.pot
+	$(foreach lang, \
+		$(I18N_LANGUAGES), \
+		msgmerge -U $(I18N_SRC)/$(lang)/LC_MESSAGES/linotpselfservice.po $(I18N_SRC)/linotpselfservice.pot \
+		;\
+	)
+
+$(I18N_SRC)/%/LC_MESSAGES/linotpselfservice.po: extract
+
+translate:
+	@echo "Execute translate-LANG (e.g. translate-de)"
+
+translate-%: $(I18N_SRC)/%/LC_MESSAGES/linotpselfservice.po
+	gtranslator $<
+	make compile_catalog
 
 # Compile a .po file to a .json file using the `pojson` tool.
 $(I18N_JSON_DEST)/%.json: $(I18N_SRC)/%/LC_MESSAGES/linotpselfservice.po
@@ -26,10 +39,6 @@ $(I18N_JSON_DEST)/%.json: $(I18N_SRC)/%/LC_MESSAGES/linotpselfservice.po
 # the .po files are compiled to .json files. The order doesn't matter.
 compile_catalog: $(I18N_JSON_FILES)
 	python setup.py compile_catalog
-
-translate: extract
-	gtranslator linotpselfservice/i18n/de/LC_MESSAGES/linotpselfservice.po
-	make compile_catalog
 
 buildtranslation: extract
 	make compile_catalog
