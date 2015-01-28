@@ -94,7 +94,7 @@ class AccountController(BaseController):
             log.error("[__before__] %s" % traceback.format_exc())
             if exx.strerror in ['Connection refused']:
                 raise webob.exc.HTTPServiceUnavailable
-            return sendError(response, exx, context='before')
+            return self.sendError(response, exx, context='before')
 
         finally:
             log.debug("[__before__::%r] done" % (action))
