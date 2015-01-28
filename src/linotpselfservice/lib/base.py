@@ -79,8 +79,12 @@ class BaseController(WSGIController):
         if key and '%(here)s' in key:
             key = key.replace('%(here)s', self.here)
 
-        if key and os.path.exists(key):
-            self.key = key
+        if key:
+            if os.path.exists(key):
+                self.key = key
+            else:
+                log.error("linotp_keyfile %s could not be found", key)
+
 
         # load the certificate file
         self.cert = None
@@ -89,8 +93,11 @@ class BaseController(WSGIController):
         if cert and '%(here)s' in cert:
             cert = cert.replace('%(here)s', self.here)
 
-        if cert and os.path.exists(cert):
-            self.cert = cert
+        if cert:
+            if os.path.exists(cert):
+                self.cert = cert
+            else:
+                log.error("linotp_certfile %s could not be found", cert)
 
         self.remote_base = self.config.get('linotp_remote_base', '/userservice')
 
