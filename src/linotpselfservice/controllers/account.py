@@ -70,7 +70,7 @@ class AccountController(BaseController):
 
             self.context = self.get_preauth_context()
             if not self.context:
-                raise Exception("Faild to setup context - check your LinOTP connection!")
+                raise Exception("Failed to setup context - check your LinOTP connection!")
 
             c.otpLogin = self.context.get('otpLogin', False)
             c.version = self.context['version']
