@@ -73,8 +73,11 @@ class LinOTPUserAuthPlugin(object):
         if key and '%(here)s' in key:
             key = key.replace('%(here)s', self.here)
         
-        if key and os.path.exists(key):
-            self.key = key
+        if key:
+            if os.path.exists(key):
+                self.key = key
+            else:
+                log.error("key_file %s could not be found", key)
 
         # load the certificate file
         self.cert = None
@@ -83,8 +86,11 @@ class LinOTPUserAuthPlugin(object):
         if cert and '%(here)s' in cert:
             cert = cert.replace('%(here)s', self.here)
 
-        if cert and os.path.exists(cert):
-            self.cert = cert
+        if cert:
+            if os.path.exists(cert):
+                self.cert = cert
+            else:
+                log.error("cert_file %s could not be found", cert)
 
 
     def __connect__(self):
