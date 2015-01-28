@@ -30,6 +30,7 @@ from urlparse import urlparse
 import json
 import httplib
 import urllib
+import os
 
 import traceback
 import logging
