@@ -159,6 +159,7 @@ class BaseController(WSGIController):
 
         self.conn.request('POST', path, urllib.urlencode(params), headers)
         response = self.conn.getresponse()
+        content = response.read()
 
         if response.status != httplib.OK:
             error = "%s: %s - %s" % (path, response.status, response.reason)
@@ -166,9 +167,9 @@ class BaseController(WSGIController):
             raise httplib.HTTPException(error)
 
         if return_json is False:
-            return response.read()
+            return content
         else:
-            return json.loads(response.read())
+            return json.loads(content)
 
 
     def get_preauth_context(self, params=None):

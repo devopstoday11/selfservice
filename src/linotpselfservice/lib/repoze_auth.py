@@ -136,11 +136,12 @@ class LinOTPUserAuthPlugin(object):
 
             self.conn.request('POST', path, params, headers)
             response = self.conn.getresponse()
+            content = response.read()
 
             if response.status != httplib.OK:
                 return None
 
-            res = json.loads(response.read())
+            res = json.loads(content)
             authUser = res.get('result',{}).get('value',False)
             if authUser != False:
                 cookie = get_cookie(response)
@@ -214,9 +215,10 @@ class LinOTPUserModelPlugin(LinOTPUserAuthPlugin):
             path = "/remoteservice/userinfo"
             self.conn.request('POST', path, urllib.urlencode(params), headers)
             response = self.conn.getresponse()
+            content = response.read()
 
             if response.status == httplib.OK:
-                res = json.loads(response.read())
+                res = json.loads(content)
                 user_data = res.get('result',{}).get('value',[])
                 if type(user_data) in [dict]:
                     identity.update(user_data)
