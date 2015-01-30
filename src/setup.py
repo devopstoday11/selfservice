@@ -18,6 +18,7 @@ setup(
         "Pylons>=1.0",
         "WebOb<1.4",
         "repoze.who<2.0",
+        "requests",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),
