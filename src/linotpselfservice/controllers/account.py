@@ -36,10 +36,9 @@ from pylons.controllers.util import abort, redirect
 from pylons.templating import render_mako as render
 from pylons.i18n.translation import get_lang
 
-from linotpselfservice.lib.base import BaseController
+from linotpselfservice.lib.base import (BaseController, InvalidLinOTPResponse)
 
 import json
-import httplib
 import logging
 import webob
 
@@ -77,11 +76,9 @@ class AccountController(BaseController):
             c.licenseinfo = self.context['licenseinfo']
             c.browser_language = self.browser_language
 
-        except httplib.HTTPException as httperr:
-            log.error("[__before__::%r] httplib.HTTPException %r" %
-                      (action, httperr))
-            log.error("[__before__] %s" % traceback.format_exc())
-            raise httperr
+        except InvalidLinOTPResponse as err:
+            log.exception("[__before__::%r] InvalidLinOTPResponse %r", action, err)
+            raise err
 
         except webob.exc.HTTPUnauthorized as acc:
             # # the exception, when an abort() is called if forwarded

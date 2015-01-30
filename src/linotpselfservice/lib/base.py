@@ -11,12 +11,10 @@ from pylons.i18n import LanguageError
 
 from linotpselfservice.config.environment import app_config
 from linotpselfservice.lib.util import get_version
+from linotpselfservice.lib.network import Connection
 
-from urlparse import urlparse
 import json
 
-import httplib
-import urllib
 import os
 
 import traceback
@@ -24,6 +22,14 @@ import logging
 
 
 log = logging.getLogger(__name__)
+
+
+class InvalidLinOTPResponse(Exception):
+    """
+    Raised when an invalid response is returned by LinOTP
+    """
+    pass
+
 
 class BaseController(WSGIController):
 
@@ -53,77 +59,52 @@ class BaseController(WSGIController):
         self.browser_language = request.headers.get('Accept-Language', None)
 
         try:
-            url = self.config['linotp_url']
+            self.base_url = self.config['linotp_url']
         except KeyError:
             raise Exception("Missing definition of remote linotp url in application ini: linotp_url")
 
-        url_parts = urlparse(url)
-        self.proto = url_parts[0]
-
-        if self.proto == 'http':
-            self.port = 80
-        elif self.proto == 'https':
-            self.port = 443
-
-        self.host = url_parts[1]
-        if ':' in self.host:
-            self.host, self.port = self.host.split(':')
-
-        self.path = url_parts[2]
-
         # load keyfile
-        self.key = None
-        key = self.config.get('linotp_keyfile', None)
+        client_key = self.config.get('client_key', None)
+        self.client_key = None
+        # replace the app root %here% if any
+        if client_key and '%(here)s' in client_key:
+            client_key = client_key.replace('%(here)s', self.here)
 
-        # replace the app root here if any
-        if key and '%(here)s' in key:
-            key = key.replace('%(here)s', self.here)
-
-        if key:
-            if os.path.exists(key):
-                self.key = key
+        if client_key:
+            if os.path.exists(client_key):
+                self.client_key = client_key
             else:
-                log.error("linotp_keyfile %s could not be found", key)
+                log.error("key_file %s could not be found", client_key)
 
+        # load the client certificate file
+        client_cert = self.config.get('client_cert', None)
+        self.client_cert = None
+        # replace the app root %here% if any
+        if client_cert and '%(here)s' in client_cert:
+            client_cert = client_cert.replace('%(here)s', self.here)
 
-        # load the certificate file
-        self.cert = None
-        cert = self.config.get('linotp_certfile', None)
-        # replace the app root here if any
-        if cert and '%(here)s' in cert:
-            cert = cert.replace('%(here)s', self.here)
-
-        if cert:
-            if os.path.exists(cert):
-                self.cert = cert
+        if client_cert:
+            if os.path.exists(client_cert):
+                self.client_cert = client_cert
             else:
-                log.error("linotp_certfile %s could not be found", cert)
+                log.error("cert_file %s could not be found", client_cert)
+
+        # load the server certificate file
+        server_cert = self.config.get('server_cert', None)
+        self.server_cert = None
+        # replace the app root %here% if any
+        if server_cert and '%(here)s' in server_cert:
+            server_cert = server_cert.replace('%(here)s', self.here)
+
+        if server_cert:
+            if os.path.exists(server_cert):
+                self.server_cert = server_cert
+            else:
+                log.error("cert_file %s could not be found", server_cert)
 
         self.remote_base = self.config.get('linotp_remote_base', '/userservice')
 
         return
-
-    def __connect__(self):
-        if self.conn is None:
-            param = {}
-            param['host'] = self.host
-            param['port'] = self.port
-
-            if self.cert is not None:
-                # if there is no cert - we use a simple http connection
-                param['cert_file'] = self.cert
-
-            if self.key is not None:
-                # if there is no cert - we use a simple http connection
-                param['key_file'] = self.key
-
-            if self.proto in ['https']:
-                self.conn = httplib.HTTPSConnection(**param)
-            else:
-                self.conn = httplib.HTTPConnection(**param)
-
-        return self.conn
-
 
     def call_linotp(self, url, params=None, return_json=True):
         """
@@ -136,7 +117,13 @@ class BaseController(WSGIController):
         :return: return the response of the request as dict or as plain text
 
         """
-        self.conn = self.__connect__()
+        if not self.conn:
+            self.conn = Connection(
+                self.base_url,
+                server_cert=self.server_cert,
+                client_cert=self.client_cert,
+                client_key=self.client_key
+                )
 
         if params is None:
             params = {}
@@ -149,27 +136,29 @@ class BaseController(WSGIController):
         if self.browser_language:
             headers['Accept-Language'] = self.browser_language
 
-        # if we are requesting for a user, provide the user auth cookie
-        if 'user' in params:
-            if hasattr(self, 'auth_cookie') and self.auth_cookie:
-                headers['Cookie'] = self.auth_cookie
-                params['session'] = self.auth_cookie.split(';')[0].split('=')[1]
+        if not self.conn.is_user_session_set:
+            # if we are requesting for a user, provide the user auth cookie
+            if 'user' in params:
+                if hasattr(self, 'auth_cookie') and self.auth_cookie:
+                    self.conn.set_user_session(self.auth_cookie, params['user'])
 
         path = url
 
-        self.conn.request('POST', path, urllib.urlencode(params), headers)
-        response = self.conn.getresponse()
-        content = response.read()
+        if 'session' in params:
+            # If a session is contained in params it is the local selfservice
+            # session (between the browser and this server) not the session
+            # between selfservice and LinOTP. Therefore we delete it. The
+            # selfservice->LinOTP session has already been set with
+            # 'self.conn.set_user_session'
+            del params['session']
+        net_response = self.conn.post(path, params=params, headers=headers)
 
-        if response.status != httplib.OK:
-            error = "%s: %s - %s" % (path, response.status, response.reason)
+        if net_response.status_code != 200:
+            error = "%s: %s - %s" % (path, net_response.status_code, net_response.reason)
             log.error(error)
-            raise httplib.HTTPException(error)
+            raise InvalidLinOTPResponse(error)
 
-        if return_json is False:
-            return content
-        else:
-            return json.loads(content)
+        return net_response.json() if return_json else net_response.text()
 
 
     def get_preauth_context(self, params=None):

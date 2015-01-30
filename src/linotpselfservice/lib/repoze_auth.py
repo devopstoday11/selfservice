@@ -28,7 +28,6 @@
 
 from urlparse import urlparse
 import json
-import httplib
 import urllib
 import os
 
@@ -42,6 +41,8 @@ from repoze.who.interfaces import IMetadataProvider
 
 from paste.request import parse_dict_querystring
 
+from linotpselfservice.lib.network import Connection
+
 log = logging.getLogger(__name__)
 
 
@@ -49,71 +50,47 @@ class LinOTPUserAuthPlugin(object):
 
     implements(IAuthenticator)
 
-    def __init__(self, url, cert_file=None, key_file=None):
+    def __init__(self, linotp_url, client_cert=None, client_key=None, server_cert=None):
         self.conn = None
 
-        url_parts = urlparse(url)
-        self.proto = url_parts[0]
-
-        if self.proto == 'http':
-            self.port = 80
-        elif self.proto == 'https':
-            self.port = 443
-
-        self.host = url_parts[1]
-        if ':' in self.host:
-            self.host,self.port = self.host.split(':')
- 
-        self.path = url_parts[2]
+        self.base_url = linotp_url
 
         # load keyfile
-        self.key = None
-        key = key_file
+        self.client_key = None
         # replace the app root %here% if any
-        if key and '%(here)s' in key:
-            key = key.replace('%(here)s', self.here)
+        if client_key and '%(here)s' in client_key:
+            client_key = client_key.replace('%(here)s', self.here)
         
-        if key:
-            if os.path.exists(key):
-                self.key = key
+        if client_key:
+            if os.path.exists(client_key):
+                self.client_key = client_key
             else:
-                log.error("key_file %s could not be found", key)
+                log.error("key_file %s could not be found", client_key)
 
-        # load the certificate file
-        self.cert = None
-        cert = cert_file
+        # load the client certificate file
+        self.client_cert = None
         # replace the app root %here% if any
-        if cert and '%(here)s' in cert:
-            cert = cert.replace('%(here)s', self.here)
+        if client_cert and '%(here)s' in client_cert:
+            client_cert = client_cert.replace('%(here)s', self.here)
 
-        if cert:
-            if os.path.exists(cert):
-                self.cert = cert
+        if client_cert:
+            if os.path.exists(client_cert):
+                self.client_cert = client_cert
             else:
-                log.error("cert_file %s could not be found", cert)
+                log.error("cert_file %s could not be found", client_cert)
 
+        # load the server certificate file
+        self.server_cert = None
+        # replace the app root %here% if any
+        if server_cert and '%(here)s' in server_cert:
+            server_cert = server_cert.replace('%(here)s', self.here)
 
-    def __connect__(self):
-        if self.conn is None:
-            param = {}
-            param['host'] = self.host
-            param['port'] = self.port
-
-            if self.cert is not None:
-                # if there is no cert - we use a simple http connection
-                param['cert_file'] = self.cert
-
-            if self.key is not None:
-                # if there is no cert - we use a simple http connection
-                param['key_file'] = self.key
-
-
-            if self.proto in ['https']:
-                self.conn = httplib.HTTPSConnection(**param)
+        if server_cert:
+            if os.path.exists(server_cert):
+                self.server_cert = server_cert
             else:
-                self.conn = httplib.HTTPConnection(**param)
+                log.error("cert_file %s could not be found", server_cert)
 
-        return self.conn
 
     # IAuthenticatorPlugin
     def authenticate(self, environ, identity):
@@ -124,8 +101,14 @@ class LinOTPUserAuthPlugin(object):
             return None
 
         try:
-            self.conn = self.__connect__()
-            params = urllib.urlencode({'login':login, 'password': password})
+            if not self.conn:
+                self.conn = Connection(
+                    self.base_url,
+                    server_cert=self.server_cert,
+                    client_cert=self.client_cert,
+                    client_key=self.client_key
+                    )
+            params = {'login':login, 'password': password}
             headers = {"Content-type": "application/x-www-form-urlencoded",
                        "Accept": "text/plain"}
 
@@ -134,17 +117,15 @@ class LinOTPUserAuthPlugin(object):
 
             path = "/userservice/auth"
 
-            self.conn.request('POST', path, params, headers)
-            response = self.conn.getresponse()
-            content = response.read()
+            net_response = self.conn.post(path, params=params, headers=headers)
 
-            if response.status != httplib.OK:
+            if net_response.status_code != 200:
                 return None
 
-            res = json.loads(content)
-            authUser = res.get('result',{}).get('value',False)
+            res = net_response.json()
+            authUser = res.get('result', {}).get('value', False)
             if authUser != False:
-                cookie = get_cookie(response)
+                cookie = net_response.get_cookie('userauthcookie')
                 if cookie:
                     return "%s;%s" % (login, cookie)
                 else:
@@ -157,25 +138,16 @@ class LinOTPUserAuthPlugin(object):
 
     def __repr__(self):
         return '<%s %s>' % (self.__class__.__name__,
-                            id(self)) #pragma NO COVERAGE
-
-def get_cookie(response):
-    cookie = ''
-    headers = response.getheaders()
-    for head in headers:
-        (key, value) = head
-        if key == 'set-cookie':
-            cookie = value
-    return cookie
+                            id(self))
 
 
 class LinOTPUserModelPlugin(LinOTPUserAuthPlugin):
 
     implements(IMetadataProvider)
 
-    def __init__(self, url, cert_file=None, key_file=None):
+    def __init__(self, linotp_url, client_cert=None, client_key=None, server_cert=None):
         self.parent = super(LinOTPUserModelPlugin, self)
-        self.parent.__init__(url, cert_file, key_file)
+        self.parent.__init__(linotp_url, client_cert, client_key, server_cert)
 
     # IMetadataProvider
     def add_metadata(self, environ, identity):
@@ -200,26 +172,31 @@ class LinOTPUserModelPlugin(LinOTPUserAuthPlugin):
             return None
 
         try:
-            self.conn = self.__connect__()
+            if not self.conn:
+                self.conn = Connection(
+                    self.base_url,
+                    server_cert=self.server_cert,
+                    client_cert=self.client_cert,
+                    client_key=self.client_key
+                    )
 
-            # for the authetication we take the 'repoze.who.userid' as it
-            # is the one which is returned from the authenticate call
-            # extended by the realm and joined with the auth_cookie
-            if ';' in identity['repoze.who.userid']:
-                user, cookie = identity['repoze.who.userid'].split(';',1)
-                headers['Cookie'] = cookie
-            else:
-                user = identity['repoze.who.userid']
-            params['user'] = user
+            if not self.conn.is_user_session_set:
+                # for the authetication we take the 'repoze.who.userid' as it
+                # is the one which is returned from the authenticate call
+                # extended by the realm and joined with the auth_cookie
+                if ';' in identity['repoze.who.userid']:
+                    user, session = identity['repoze.who.userid'].split(';', 1)
+                    self.conn.set_user_session(session, user)
+                else:
+                    user = identity['repoze.who.userid']
+                    self.conn.set_user_session(None, user)
 
             path = "/remoteservice/userinfo"
-            self.conn.request('POST', path, urllib.urlencode(params), headers)
-            response = self.conn.getresponse()
-            content = response.read()
+            response = self.conn.post(path, params=params, headers=headers)
 
-            if response.status == httplib.OK:
-                res = json.loads(content)
-                user_data = res.get('result',{}).get('value',[])
+            if response.status_code == 200:
+                res = response.json()
+                user_data = res.get('result', {}).get('value',[])
                 if type(user_data) in [dict]:
                     identity.update(user_data)
 
@@ -232,20 +209,40 @@ class LinOTPUserModelPlugin(LinOTPUserAuthPlugin):
 
     def __repr__(self):
         return '<%s %s>' % (self.__class__.__name__,
-                            id(self)) #pragma NO COVERAGE
+                            id(self))
 
-def make_auth_plugin(url, cert_file=None, key_file=None):
+def make_auth_plugin(
+        linotp_url,
+        client_cert=None,
+        client_key=None,
+        server_cert=None
+        ):
     # we could check here, if the cert and key file are avail and accessible
     try:
-        plugin = LinOTPUserAuthPlugin(url, cert_file, key_file)
+        plugin = LinOTPUserAuthPlugin(
+            linotp_url,
+            client_cert=client_cert,
+            client_key=client_key,
+            server_cert=server_cert
+            )
     except Exception as exx:
         raise exx
     return plugin
 
-def make_modl_plugin(url, cert_file=None, key_file=None):
+def make_modl_plugin(
+        linotp_url,
+        client_cert=None,
+        client_key=None,
+        server_cert=None
+        ):
     # we could check here, if the cert and key file are avail and accessible
     try:
-        plugin = LinOTPUserModelPlugin(url, cert_file, key_file)
+        plugin = LinOTPUserModelPlugin(
+            linotp_url,
+            client_cert=client_cert,
+            client_key=client_key,
+            server_cert=server_cert
+            )
     except Exception as exx:
         raise exx
     return plugin
