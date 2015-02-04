@@ -121,7 +121,7 @@ ${_("If you lost a token, you may also disable this token.")}
         <tr><td><input type="hidden" id="otp" name="otp" value="" /></td></tr>
      %endif
         <tr><td> </td>
-        <td>   <input type="submit" value="Login" /></td></tr>
+        <td>   <input type="submit" value="${_('Login')}" /></td></tr>
       </table>
     </form>
 </p>
