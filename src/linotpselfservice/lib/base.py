@@ -26,10 +26,15 @@ log = logging.getLogger(__name__)
 
 class InvalidLinOTPResponse(Exception):
     """
-    Raised when an invalid response is returned by LinOTP
+    Exception raised, when an invalid response is returned by LinOTP
     """
-    pass
+    def __init__(self, error, url='', path='', status_code=None, reason=None):
+        self.url = url
+        self.path = path
+        self.status_code = status_code
+        self.reason = reason
 
+        super(InvalidLinOTPResponse, self).__init__(self)
 
 class BaseController(WSGIController):
 
@@ -60,8 +65,12 @@ class BaseController(WSGIController):
 
         try:
             self.base_url = self.config['linotp_url']
+            #trim trailing slashes
+            while self.base_url[-1] == '/':
+                self.base_url = self.base_url[:-1]
         except KeyError:
-            raise Exception("Missing definition of remote linotp url in application ini: linotp_url")
+            raise Exception("Missing definition of remote linotp url"
+                            " in application ini: linotp_url")
 
         # load keyfile
         client_key = self.config.get('client_key', None)
@@ -151,12 +160,20 @@ class BaseController(WSGIController):
             # selfservice->LinOTP session has already been set with
             # 'self.conn.set_user_session'
             del params['session']
+
         net_response = self.conn.post(path, params=params, headers=headers)
 
         if net_response.status_code != 200:
-            error = "%s: %s - %s" % (path, net_response.status_code, net_response.reason)
+            error = "%s%s: %s - %s" % (self.config.get('linotp_url', ''), path,
+                                       net_response.status_code,
+                                       net_response.reason)
             log.error(error)
-            raise InvalidLinOTPResponse(error)
+
+            raise InvalidLinOTPResponse(error,
+                                        url=self.config.get('linotp_url', ''),
+                                        path=path,
+                                        status_code=net_response.status_code,
+                                        reason=net_response.reason)
 
         return net_response.json() if return_json else net_response.text()
 

@@ -2,13 +2,13 @@
 # Copyright (C) 2014 ORGANIZATION
 # This file is distributed under the same license as the LinOTP project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-# FULL NAME <EMAIL@ADDRESS>, 2014.
+# FULL NAME <EMAIL@ADDRESS>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: LinOTP 2.7.1.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"PO-Revision-Date: 2014-12-31 12:36+0100\n"
+"PO-Revision-Date: 2015-06-10 19:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -16,6 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+
+msgid "Failed to setup context - check your LinOTP connection!"
+msgstr ""
+"Erstellen des Kontexts fehlgeschlagen - bitte Verbindung zum LinOTP Server "
+"prüfen!"
+
+#, python-format
+msgid "Invalid linotp response: %r"
+msgstr "Ungültige Antwort von LinOTP: %r"
+
+msgid "Failed to connect to the linotp server"
+msgstr "Fehler beim Aufbau der Verbindung zum LinOTP Server"
+
+msgid "Authentication attempt failed!"
+msgstr "Authentisierung fehlgeschlagen!"
+
+msgid "Connection response:"
+msgstr "Verbindungs Antwort:"
+
+msgid "Logout from LinOTP selfservice"
+msgstr "Abmelden vom LinOTP Selfservice"
 
 msgid "You are not authenticated"
 msgstr "Sie wurden nicht autentisiert"
@@ -298,15 +319,6 @@ msgstr "OTP Token aktivieren"
 msgid "enable Token"
 msgstr "Token aktivieren"
 
-msgid "get OTP values from Token"
-msgstr "OTP Werte des Token berechnen"
-
-msgid "Number of OTP values to retrieve"
-msgstr "Anzahl der zu berechnenden OTP Werte"
-
-msgid "get OTP values"
-msgstr "berechne OTP Werte"
-
 msgid ""
 "This is the LinOTP self service portal. You may login here with your "
 "username and realm."
@@ -327,6 +339,15 @@ msgstr ""
 
 msgid "Login to LinOTP self service"
 msgstr "Anmelden für den LinOTP Selfservice"
+
+msgid "get OTP values from Token"
+msgstr "OTP Werte des Token berechnen"
+
+msgid "Number of OTP values to retrieve"
+msgstr "Anzahl der zu berechnenden OTP Werte"
+
+msgid "get OTP values"
+msgstr "berechne OTP Werte"
 
 msgid "Username"
 msgstr "Benutzer"

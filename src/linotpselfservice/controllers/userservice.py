@@ -33,21 +33,21 @@ class UserserviceController(BaseController):
 
     def __before__(self, action, **params):
 
-            identity = request.environ.get('repoze.who.identity')
-            if identity is None:
-                abort(401, _("You are not authenticated"))
+        identity = request.environ.get('repoze.who.identity')
+        if identity is None:
+            abort(401, _("You are not authenticated"))
 
-            log.debug("[__before__] doing getAuthFromIdentity in action %s" % action)
+        log.debug("[__before__] doing getAuthFromIdentity in action %s" % action)
 
-            if ';' in identity['repoze.who.userid']:
-                self.userid, self.auth_cookie = identity['repoze.who.userid'].split(';', 1)
-            else:
-                self.userid = identity['repoze.who.userid']
-                self.auth_cookie = None
+        if ';' in identity['repoze.who.userid']:
+            self.userid, self.auth_cookie = identity['repoze.who.userid'].split(';', 1)
+        else:
+            self.userid = identity['repoze.who.userid']
+            self.auth_cookie = None
 
-            if action not in ['load_form']:
-                if check_selfservice_session(request) == False:
-                    abort(401, _("No valid session"))
+        if action not in ['load_form']:
+            if check_selfservice_session(request) == False:
+                abort(401, _("No valid session"))
 
     def enable(self):
         '''

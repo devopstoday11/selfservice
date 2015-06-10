@@ -40,7 +40,6 @@ if isinstance(lang, list):
 
 <html>
 <head>
-<title>${_("LinOTP 2 User self service")}</title>
 <meta name="copyright" content="LSE Leading Security Experts GmbH">
 <meta name="keywords" content="LinOTP 2, self service">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -51,15 +50,12 @@ if isinstance(lang, list):
 <link type="text/css" rel="stylesheet" href="/selfservice/custom-style.css" />
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 
+<title>${_("LinOTP 2 User self service")}</title>
+
 </head>
 
 <body>
 
-<script>
-$(document).ready(function() {
-    $('form:first *:input[type!=hidden]:first').focus();
-});
-</script>
 
 <div id="wrap">
 
@@ -85,46 +81,7 @@ ${_("If you lost a token, you may also disable this token.")}
 
 <div id="main">
 <h1>${_("Login to LinOTP self service")}</h1>
-
-<p>
-    <form action="/account/dologin" method="POST">
-      <table>
-        <tr><td><label for=login>${_("Username")}:</label></td>
-        <td><input type="text" id="login" name="login" value="" /></td></tr>
-
-        %if c.realmbox and len(c.realmArray) > 0:
-            <td>${_("Realm")}:</td>
-            <td>
-            <select name="realm">
-                % for realm in c.realmArray:
-                %if c.defaultRealm == realm:
-                <option value="${realm}" selected>${realm}</option>
-                %else:
-                <option value="${realm}">${realm}</option>
-                %endif
-                %endfor
-            </select>
-            </td></tr>
-        %else:
-            <tr><td><input type="hidden" id="realm" name="realm"
-                value="${c.defaultRealm}" /></td></tr>
-        %endif
-        <tr><td><label for='password'>${_("Password")}:</label></td>
-        <td><input autocomplete="off" type="password" id="password"
-                    name="password" value ="" /></td></tr>
-
-     %if c.otpLogin == True:
-        <tr><td><label for='otp'>${_("OTP")}:</label></td>
-        <td><input autocomplete="off" type="password" id="otp"
-                    name="otp" value ="" /></td></tr>
-     %else:
-        <tr><td><input type="hidden" id="otp" name="otp" value="" /> </td></tr>
-     %endif
-        <tr><td> </td>
-        <td>   <input type="submit" value="${_('Login')}" /></td></tr>
-      </table>
-    </form>
-</p>
+<h2>${c.error}</h2>
 
 <div id='errorDiv'>${c.status}</div>
 <div id='successDiv'> </div>
@@ -133,7 +90,7 @@ ${_("If you lost a token, you may also disable this token.")}
 </div>  <!-- end of main-->
 
 <div id="footer">
-    ${c.version} --- &copy; ${c.licenseinfo}
+
 </div>
 </div>  <!-- end of wrap -->
 </body>
