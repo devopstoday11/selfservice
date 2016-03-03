@@ -1,0 +1,525 @@
+#
+#    LinOTP - the open source solution for two factor authentication
+#    Copyright (C) 2010 - 2016 LSE Leading Security Experts GmbH
+#
+#    This file is part of LinOTP selfservice.
+#
+#    This program is free software: you can redistribute it and/or
+#    modify it under the terms of the GNU Affero General Public
+#    License, version 3, as published by the Free Software Foundation.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the
+#               GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
+#    E-mail: linotp@lsexperts.de
+#    Contact: www.linotp.org
+#    Support: www.lsexperts.de
+# linotp@lsexperts.de <>, 2016.
+#
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: linotp@lsexperts.de\n"
+"PO-Revision-Date: 2016-03-03 17:35+0100\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+msgid "Failed to setup context - check your LinOTP connection!"
+msgstr ""
+"Échec de la création du contexte - veuillez vérifier la connexion au serveur "
+"LinOTP !"
+
+#, python-format
+msgid "Invalid linotp response: %r"
+msgstr "Réponse de LinOTP invalide : %r"
+
+msgid "Failed to connect to the linotp server"
+msgstr "Erreur lors de la connexion au serveur LinOTP"
+
+msgid "Authentication attempt failed!"
+msgstr "Échec de l'authentification !"
+
+msgid "Connection response:"
+msgstr "Réponse de la connexion :"
+
+msgid "Logout from LinOTP selfservice"
+msgstr "Se déconnecter du Self Service LinOTP"
+
+msgid "You are not authenticated"
+msgstr "Vous n'avez pas été authentifié"
+
+msgid "LinOTP Self Service"
+msgstr " Self Service LinOTP"
+
+msgid "No valid session"
+msgstr "Pas de session valide"
+
+msgid "there is no linotp_selfservice cookie"
+msgstr "le cookie linotp_selfservice manque"
+
+msgid "Your session has expired!"
+msgstr "Votre session a expiré !"
+
+msgid "Error "
+msgstr "Erreur "
+
+msgid "You need to select a Token and enter two OTP values."
+msgstr "Vous devez sélectionner un token et entrer deux valeurs OTP."
+
+msgid "Token resynced successfully"
+msgstr "Synchronisation du token effectuée avec succès"
+
+msgid "Failed to resync Token"
+msgstr "Erreur lors de la synchronisation du token"
+
+msgid "Error resyncing Token: "
+msgstr "Erreur lors de la synchronisation du token : "
+
+msgid "You need to enter a serial number"
+msgstr "Vous devez entrer un numéro de série"
+
+msgid ""
+"You are going to assign a new token to you. Is this the correct serial: "
+msgstr ""
+"Vous souhaitez vous attribuer un nouveau token. Est-ce le bon numéro de "
+"série :"
+
+msgid "Token assigned successfully"
+msgstr "Token attribué avec succès"
+
+msgid "Error assigning Token: "
+msgstr "Erreur lors de l'attribution du token : "
+
+msgid "You need to enter an OTP value"
+msgstr "Vous devez entrer une valeur OTP"
+
+msgid "No Token with this OTP value found!"
+msgstr "Aucun token trouvé qui correspond à la valeur OTP !"
+
+msgid "Error getting serial: "
+msgstr "Erreur lors de la détermination du numéro de série : "
+
+msgid "Error calling token:"
+msgstr "Erreur lors de l'édition du token : "
+
+msgid "Form data not valid."
+msgstr "Les données du formulaire sont invalides."
+
+msgid "Token enrollment result"
+msgstr "Résultat du déploiement du token"
+
+msgid "Token enrolled successfully "
+msgstr "Token déployé avec succès "
+
+msgid "Failed to enroll token: "
+msgstr "Erreur lors du déploiement du token : "
+
+msgid "Failcounter resetted successfully"
+msgstr "Compteur d'erreurs réinitialisé avec succès"
+
+msgid "Failed to reset failcounter!\n"
+msgstr "Erreur lors de la réinitialisation du compteur d'erreurs !\n"
+
+msgid "Token disabled successfully"
+msgstr "Token désactivé avec succès"
+
+msgid "Error disabling Token!\n"
+msgstr "Erreur lors de la désactivation du token !\n"
+
+msgid "Token enabled successfully"
+msgstr "Token activé avec succès"
+
+msgid "Error enabling Token!\n"
+msgstr "Erreur lors de l'activation du token !\n"
+
+msgid "OTP values for token "
+msgstr "Valeurs OTP pour le token "
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "Counter"
+msgstr "Compteur"
+
+msgid "Otp Value"
+msgstr "Valeurs OTP"
+
+msgid "Error getting otp values"
+msgstr "Erreur lors de l'obtention des valeurs OTP"
+
+msgid "Token unassigned successfully"
+msgstr "Attribution du token supprimée avec succès"
+
+msgid "Error unassigning Token!\n"
+msgstr "Erreur lors de la suppression de l'attribution du token !\n"
+
+msgid "Token deleted successfully"
+msgstr "Token supprimé avec succès"
+
+msgid "Failed to delete token!\n"
+msgstr "Erreur lors de la suppression du token !\n"
+
+msgid "Failed to enroll token!\n"
+msgstr "Erreur lors du déploiement du token !\n"
+
+msgid "Failed to activate token! \n"
+msgstr "Erreur lors de l'activation du token ! \n"
+
+msgid "Error loading history:\n"
+msgstr "Erreur lors du chargement de l'historique :\n"
+
+msgid "Activate your OCRA Token"
+msgstr "Activer le token OCRA"
+
+msgid "Your OCRA Token :"
+msgstr "Votre token OCRA : "
+
+msgid "1. Enter the activation code :"
+msgstr " 1. Entrez le code d'activation : "
+
+msgid "Failed to enroll token!"
+msgstr "Erreur lors du déploiement du token !"
+
+msgid "activate your OCRA Token"
+msgstr "Activez votre token OCRA"
+
+msgid "2. Enter your confirmation code:"
+msgstr "2. Entrez votre code de confirmation :"
+
+#, python-format
+msgid "OCRA rollout for token %s completed!"
+msgstr "Déploiement OCRA pour le token %s terminé !"
+
+msgid "OCRA token rollout failed! Please retry"
+msgstr "Échec du déploiement du token OCRA ! Veuillez réessayer"
+
+msgid "finish your OCRA Token"
+msgstr "Terminer le déploiement OCRA du token"
+
+msgid "Assign OTP Token"
+msgstr "Attribuer le token OTP"
+
+msgid ""
+"You may either assign the token by entering the serial number or you can "
+"enter an OTP value of the token and the system will try to identify the "
+"token for you."
+msgstr ""
+"Vous pouvez attribuer un token en entrant le numéro de série, ou vous pouvez "
+"entrer une valeur OTP et le système tentera ainsi d'identifier le token."
+
+msgid "The OTP value of the Token to assign"
+msgstr "Valeur OTP pour l'attribution de token"
+
+msgid "determine serial number"
+msgstr "Déterminer le numéro de série"
+
+msgid "Serialnumber of new Token"
+msgstr "Numéro de série du nouveau token"
+
+msgid "assign Token"
+msgstr "Attribuer le token"
+
+msgid "LinOTP 2 User self service"
+msgstr "Self Service utilisateur LinOTP 2"
+
+msgid "Selfservice Portal"
+msgstr "Portail Self Service"
+
+msgid "Logged in as"
+msgstr "Connecté en tant que"
+
+msgid "Logout"
+msgstr "Fermer la session"
+
+msgid "Communicating with LinOTP server..."
+msgstr "Communication avec le serveur LinOTP..."
+
+msgid "Tokens for user:"
+msgstr "Token de l'utilisateur :"
+
+msgid "in realm"
+msgstr "dans le domaine"
+
+msgid "Activate your QR token"
+msgstr "Activez votre token QR"
+
+msgid "Activate your OCRA token"
+msgstr "Activez votre token OCRA"
+
+msgid "Enroll OATH token"
+msgstr "Déployer le token OATH"
+
+msgid "Enroll OATH soft token"
+msgstr "Déployer le Softoken OATH"
+
+msgid "Assign Token"
+msgstr "Attribuer le token"
+
+msgid "Disable Token"
+msgstr "Désactiver le token"
+
+msgid "Enable Token"
+msgstr "Activer le token"
+
+msgid "Resync Token"
+msgstr "Synchroniser le token"
+
+msgid "Reset Failcounter"
+msgstr "Réinitialiser le compteur d'erreurs"
+
+msgid "Set PIN"
+msgstr "Définir le code PIN"
+
+msgid "Set mOTP PIN"
+msgstr "Définir le code PIN mOTP"
+
+msgid "Get OTP values"
+msgstr "Valeurs OTP"
+
+msgid "Unassign Token"
+msgstr "Annuler l'attribution de token"
+
+msgid "Delete Token"
+msgstr "Supprimer le token"
+
+msgid "History"
+msgstr "Historique"
+
+#, python-format
+msgid ""
+"Error enrolling token:\n"
+" %s"
+msgstr ""
+"Erreur lors du déploiement du token :\n"
+" %s"
+
+#, python-format
+msgid ""
+"Token enrolled successfully:\n"
+" %s"
+msgstr ""
+"Token déployé avec succès :\n"
+" %s"
+
+msgid "Delete OTP Token"
+msgstr "Supprimer le token OTP"
+
+msgid "Selected Token"
+msgstr "Token sélectionné"
+
+msgid "delete token"
+msgstr "Supprimer le token"
+
+msgid "Disable OTP Token"
+msgstr "Désactiver le token OTP"
+
+msgid "selected Token"
+msgstr "token sélectionné"
+
+msgid "disable Token"
+msgstr "Désactiver le token"
+
+msgid "Enable OTP Token"
+msgstr "Activer le token OTP"
+
+msgid "enable Token"
+msgstr "Activer le token"
+
+msgid ""
+"This is the LinOTP self service portal. You may login here with your "
+"username and realm."
+msgstr ""
+"C'est le portail LinOTP d'auto-assistance. Ici, vous pouvez vous connecter "
+"avec votre nom d'utilisateur et votre domaine."
+
+msgid ""
+"Within the self service portal you may reset the PINs of your tokens, assign "
+"new tokens or resync your tokens."
+msgstr ""
+"Dans le portail Self Service, vous pouvez réinitialiser le code PIN de votre "
+"token, vous attribuer un nouveau token ou synchroniser votre token."
+
+msgid "If you lost a token, you may also disable this token."
+msgstr "Si vous avez perdu votre token, vous pouvez aussi le désactiver ici"
+
+msgid "Login to LinOTP self service"
+msgstr "Connexion au Self Service LinOTP"
+
+msgid "get OTP values from Token"
+msgstr "Calculer les valeurs OTP du token"
+
+msgid "Number of OTP values to retrieve"
+msgstr "Nombre des valeurs OTP à calculer"
+
+msgid "get OTP values"
+msgstr "Calcul des valeurs OTP"
+
+msgid "Username"
+msgstr "Utilisateur"
+
+msgid "Realm"
+msgstr "Domaine"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "OTP"
+msgstr "OTP"
+
+msgid "Login"
+msgstr "Se connecter"
+
+msgid "Register your SMS OTP Token / mobileTAN"
+msgstr "Enregistrez votre token SMS OTP / TAN mobile"
+
+msgid "Your mobile phone number"
+msgstr "Votre numéro de téléphone mobile"
+
+msgid "register SMS Token"
+msgstr "Enregistrer le token SMS"
+
+msgid "reset Failcounter"
+msgstr "Réinitialiser le compteur d'erreurs"
+
+msgid "Resync OTP Token"
+msgstr "Synchroniser le token OTP"
+
+msgid "resync OTP"
+msgstr "Synchroniser OTP"
+
+msgid ""
+"This (re)sets the mOTP PIN, which is the PIN that is entered in the motp "
+"application on your phone."
+msgstr ""
+"Ici, vous pouvez initialiser le coder PIN mOTP (réinitialiser), le code PIN "
+"entré dans l'application mOTP de votre appareil mobile"
+
+msgid "repeat mOTP PIN"
+msgstr "Répéter le code PIN mOTP"
+
+msgid "set mOTP PIN"
+msgstr "Définir le code PIN mOTP"
+
+msgid "The passwords do not match!"
+msgstr "Les mots de passe ne correspondent pas."
+
+msgid "Error setting mOTP PIN: "
+msgstr "Erreur lors du réglage du code PIN mOTP"
+
+msgid "mOTP PIN set successfully"
+msgstr "Le code PIN mOTP a été créé avec succès"
+
+msgid "Set OTP PIN"
+msgstr "Définir le code PIN OTP"
+
+msgid "repeat PIN"
+msgstr "Répéter le code PIN"
+
+msgid "set PIN"
+msgstr "Définir le code PIN"
+
+msgid "Error setting PIN: "
+msgstr "Erreur lors du réglage du code PIN"
+
+msgid "PIN set successfully"
+msgstr "Le code PIN a été défini avec succès"
+
+msgid "Unassign OTP Token"
+msgstr "Annuler l'attribution de token OTP"
+
+msgid "unassign Token"
+msgstr "Annuler l'attribution de token"
+
+msgid "Provision your OATH soft token"
+msgstr "Approvisionnez votre Softtoken OATH"
+
+msgid ""
+"You need an OATH compatible soft token app installed on your mobile device."
+msgstr ""
+"Vous devez installer une application Softtoken compatible avec OATH sur "
+"votre smartphone."
+
+msgid "(FreeOTP, Google Authenticator or another OATH compatible soft token)"
+msgstr ""
+"(FreeOTP, Google Authenticator ou autre Softtoken compatible avec OATH)"
+
+msgid "Provision your soft token in LinOTP"
+msgstr "Approvisionnez votre Softtoken dans LinOTP"
+
+msgid "Choose your token profile "
+msgstr "Sélectionnez votre profil token "
+
+msgid "event based"
+msgstr "basé sur un évènement"
+
+msgid "time based"
+msgstr "basé sur le temps"
+
+msgid "and"
+msgstr "et"
+
+msgid "enroll your token"
+msgstr "Déployez votre token"
+
+msgid "enroll your event based token"
+msgstr "Déployez votre token basé sur un évènement"
+
+msgid "enroll your time based token"
+msgstr "Déployez votre token basé sur le temps"
+
+msgid "Install your soft token profile"
+msgstr "Installez votre profil Softtoken"
+
+msgid ""
+"To install the token on your mobile device, scan the QR code below with your "
+"soft token app or follow the link"
+msgstr ""
+"afin d'installer le token sur votre smartphone, numérisez le QR Code avec "
+"votre application Softtoken ou suivez le lien"
+
+msgid "Provision your OATH Token"
+msgstr "Approvisionnez votre token OATH"
+
+msgid "1. You first need to install the oathtoken to your iPhone."
+msgstr "1. Tout d'abord, installez oathtoken sur votre iPhone"
+
+msgid "link for iPhone"
+msgstr "Lien pour iPhone"
+
+msgid ""
+"Using the QR Code you can directly go to install the oath token on your "
+"iPhone."
+msgstr "Utilisez le code QR pour installer le token OATH sur votre iPhone"
+
+msgid "2. Then you may create a profile."
+msgstr "2. Ensuite, vous pouvez créer un profil"
+
+msgid "enroll OATH Token"
+msgstr "Déployer le token OATH"
+
+msgid "3."
+msgstr "3. "
+
+msgid "successfully created!"
+msgstr "créé avec succès !"
+
+msgid "Click on this link to install the oathtoken profile to your iPhone:"
+msgstr "Suivre le lien pour installer le profil oathtoken sur votre iPhone."
+
+msgid "install profile"
+msgstr "Installer un profil"
+
+msgid "Or you can scan the QR code below your iPhone to import the secret."
+msgstr ""
+"Vous pouvez également numériser le code QR avec votre iPhone pour transférer "
+"le secret."
