@@ -209,8 +209,7 @@ class AccountController(BaseController):
                 for (k, v) in realms.items():
                     c.realmArray.append(k)
 
-            status = _("Logout from LinOTP selfservice")
-            response.status = '%i %s' % (LOGIN_CODE, status)
+            response.status = '%i Logout from LinOTP selfservice' % LOGIN_CODE
             return render('/selfservice/login.mako')
 
         except Exception as exx:
