@@ -40,7 +40,7 @@ from linotpselfservice.lib.util import get_version
 from linotpselfservice.lib.network import Connection
 
 import json
-
+import re
 import os
 
 import traceback
@@ -48,6 +48,10 @@ import logging
 
 
 log = logging.getLogger(__name__)
+
+# HTTP-ACCEPT-LANGUAGE strings are in the form of i.e.
+# de-DE, de; q=0.7, en; q=0.3
+accept_language_regexp = re.compile(r'\s*([^\s;,]+)\s*[;\s*q=[0-9.]*]?\s*,?')
 
 
 class InvalidLinOTPResponse(Exception):
@@ -228,28 +232,31 @@ class BaseController(WSGIController):
 
     def set_language(self, headers):
         '''Invoke before everything else. And set the translation language'''
-        languages = headers.get('Accept-Language', '').split(';')
+        languages = headers.get('Accept-Language', '')
 
         found_lang = False
 
-        for language in languages:
-            for lang in language.split(','):
-                try:
-                    if lang[:2] == "en":
-                        found_lang = True
-                        break
-                    if lang == 'de':
-                        pass
-                    set_lang(lang)
-                    found_lang = True
-                    break
-                except LanguageError as exx:
-                    pass
+        for match in accept_language_regexp.finditer(languages):
+            # make sure we have a correct language code format
+            language = match.group(1)
+            if not language:
+                continue
+            language = language.replace('_', '-').lower()
 
-            if found_lang is True:
+            # en is the default language
+            if language.split('-')[0] == 'en':
+                found_lang = True
                 break
 
-        if found_lang is False:
+            try:
+                set_lang(language.split('-')[0])
+                found_lang = True
+                break
+            except LanguageError:
+                log.debug("Cannot set requested language: %s. Trying next language if available.",
+                          language)
+
+        if not found_lang:
             log.warning("Cannot set preferred language: %r" % languages)
 
         return
