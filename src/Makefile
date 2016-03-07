@@ -1,6 +1,6 @@
 DESTDIR=/
 
-I18N_LANGUAGES = de fr es
+I18N_LANGUAGES = de fr es it
 I18N_SRC := $(CURDIR)/linotpselfservice/i18n
 I18N_JSON_DEST := $(CURDIR)/linotpselfservice/public/i18n
 I18N_PO_FILES := $(foreach lang,$(I18N_LANGUAGES),$(I18N_SRC)/$(lang)/LC_MESSAGES/linotpselfservice.po)
