@@ -645,7 +645,7 @@ function selectToken(serial) {
 }
 
 function showTokenlist() {
-    $.get('/selfservice/usertokenlist', {
+    $.post('/selfservice/usertokenlist', {
         session : get_selfservice_session()
     }, function(data, textStatus, XMLHttpRequest) {
         $('#tokenDiv').html(data);
@@ -660,6 +660,7 @@ function check_active_session() {
         data : { 'session' : get_selfservice_session() },
         cache : false,
         async : false,
+        type : 'POST',
         error : function(data) {
                 if (data.status == LOGIN_CODE) {
                     alert(i18n.gettext("Your session has expired!"));
@@ -774,8 +775,9 @@ function load_flexi(){
 
 function view_audit_selfservice() {
        $("#audit_selfservice_table").flexigrid({
-            url : '/userservice/history?session='+ get_selfservice_session(),
-            method: 'GET',
+            url : '/userservice/history',
+            method: 'POST',
+            params: [{name:'session', value: get_selfservice_session()}],
             dataType : 'json',
             colModel : [{display: 'date', name : 'date', width : 160, sortable : true},
                         {display: 'action', name : 'action', width : 120, sortable : true},

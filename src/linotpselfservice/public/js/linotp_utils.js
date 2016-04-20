@@ -125,3 +125,50 @@ function console_log(msg) {
         window.opera.postError(msg);
     }
 }
+
+
+function entity_decode(msg) {
+    var type = typeof msg;
+    if (type == 'string') {
+        msg = msg.replace(/&gt;/g, '>');
+        msg = msg.replace(/&lt;/g, '<');
+        msg = msg.replace(/&quot;/g, '"');
+        msg = msg.replace(/&#39;/g, "'");
+        msg = msg.replace(/&amp;/g, '&');
+    }
+    return msg;
+}
+function entity_encode(msg) {
+    var type = typeof msg;
+    if (type == 'string') {
+        msg = msg.replace(/&/g, '&amp;');
+        msg = msg.replace(/>/g, '&gt;');
+        msg = msg.replace(/</g, '&lt;');
+        msg = msg.replace(/"/g, '&quot;');
+        msg = msg.replace(/'/g, '&#39;');
+    }
+    return msg;
+}
+/*
+treewalk an json document and execute the callback on every leave
+*/
+function traverse(jData, callback) {
+  var type = typeof jData;
+    if (type == 'object') {
+        for (var key in jData) {
+            jData[key] = traverse(jData[key], callback);
+        }
+        return jData;
+    } else {
+        return callback(jData);
+    }
+}
+
+function escape(data) {
+	return traverse(data, entity_encode);
+}
+
+function descape(data) {
+	return traverse(data, entity_decode);
+}
+
