@@ -66,6 +66,18 @@ class InvalidLinOTPResponse(Exception):
 
         super(InvalidLinOTPResponse, self).__init__(self)
 
+class SessionExpiratioException(Exception):
+    """
+    Exception raised, when error code 567 is returned by LinOTP
+    """
+    def __init__(self, error, url='', path='', status_code=None, reason=None):
+        self.url = url
+        self.path = path
+        self.status_code = status_code
+        self.reason = reason
+
+        super(SessionExpiratioException, self).__init__(self)
+
 class BaseController(WSGIController):
 
     def __call__(self, environ, start_response):
@@ -198,6 +210,12 @@ class BaseController(WSGIController):
                                        net_response.status_code,
                                        net_response.reason)
             log.error(error)
+            if net_response.reason == "Logout from LinOTP selfservice":
+                raise SessionExpiratioException(error,
+                                        url=self.config.get('linotp_url', ''),
+                                        path=path,
+                                        status_code=net_response.status_code,
+                                        reason=net_response.reason)
 
             raise InvalidLinOTPResponse(error,
                                         url=self.config.get('linotp_url', ''),

@@ -79,6 +79,7 @@ class SelfserviceController(BaseController):
 
         identity = request.environ.get('repoze.who.identity')
         if identity is None:
+            response.delete_cookie('userauthcookie')
             abort(401, _("You are not authenticated"))
 
         log.debug("getAuthFromIdentity in action %s" % action)
@@ -91,6 +92,7 @@ class SelfserviceController(BaseController):
             self.context = self.get_context({"user" :self.userid})
         except Exception as exx:
             log.error("linotp context lookup failed %r" % exx)
+            response.delete_cookie('userauthcookie')
             abort(401, _("You are not authenticated"))
 
         copy_context_(self.context)

@@ -40,6 +40,7 @@ from pylons.templating import render_mako as render
 
 from linotpselfservice.lib.util import check_selfservice_session
 from linotpselfservice.lib.base import BaseController
+from linotpselfservice.lib.base import SessionExpiratioException
 
 from pylons.i18n.translation import _
 
@@ -84,6 +85,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/enable',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -101,6 +105,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/disable',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -118,6 +125,10 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/delete',
                                      params=params)
+
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -135,6 +146,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/reset',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -152,6 +166,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/unassigne',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -169,6 +186,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/setpin',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -186,6 +206,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/setmpin',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -203,6 +226,10 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/resync',
                                      params=params)
+
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -220,6 +247,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/assign',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -237,6 +267,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/unassign',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -255,6 +288,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/enroll',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -272,6 +307,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/webprovision',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -289,6 +326,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/getmultiotp',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -306,6 +345,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/getSerialByOtp',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -323,6 +364,10 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/history',
                                      params=params)
+
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -340,6 +385,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/activateocratoken',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -357,6 +404,8 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/finshocra2token',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -374,6 +423,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/finshocratoken',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
@@ -391,6 +443,9 @@ class UserserviceController(BaseController):
             params['user'] = self.userid
             reply = self.call_linotp('/userservice/token_call',
                                      params=params)
+        except SessionExpiratioException as exx:
+            abort(401, _("No valid session"))
+
         except Exception as exx:
             log.error("failed to call remote service: %r" % exx)
             self.sendError(response, "%r" % exx)
