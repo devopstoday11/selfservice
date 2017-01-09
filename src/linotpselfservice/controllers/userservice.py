@@ -156,26 +156,6 @@ class UserserviceController(BaseController):
         response.content_type = 'application/json'
         return json.dumps(reply)
 
-    def unassigne(self):
-        '''
-        '''
-        params = {}
-        reply = {}
-        try:
-            params.update(request.params)
-            params['user'] = self.userid
-            reply = self.call_linotp('/userservice/unassigne',
-                                     params=params)
-        except SessionExpiratioException as exx:
-            abort(401, _("No valid session"))
-
-        except Exception as exx:
-            log.error("failed to call remote service: %r" % exx)
-            self.sendError(response, "%r" % exx)
-
-        response.content_type = 'application/json'
-        return json.dumps(reply)
-
     def setpin(self):
         '''
         '''
